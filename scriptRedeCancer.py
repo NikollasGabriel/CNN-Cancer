@@ -14,7 +14,10 @@ classificador = Sequential()
 #classificador.add(BatchNormalization())
 #classificador.add(MaxPooling2D(pool_size=(3,3)))
 
-classificador.add(Conv2D(32, (3, 3), padding='same',input_shape=(125,125,1), activation = 'relu'))
+size = 150
+
+classificador.add(Conv2D(32, (3, 3), padding='same',input_shape=(size,size,1), activation = 'relu'))
+classificador.add(BatchNormalization())
 classificador.add(Conv2D(32, (3, 3)))
 classificador.add(MaxPooling2D(pool_size=(2, 2)))
 classificador.add(Dropout(0.25))
@@ -58,14 +61,14 @@ gerador_teste = ImageDataGenerator(rescale = 1./255)
 
 #carregando as imagens para treinamento 91 total, e convertendo para gray scale
 base_treinamento = gerador_treinamento.flow_from_directory('dataset/training_set',
-                                                           target_size = (125, 125),
+                                                           target_size = (size, size),
                                                            batch_size = 10,
                                                            class_mode = 'binary',
                                                            color_mode = 'grayscale') #'dataset/treinamento_set''C:/Users/BlueTerror/Desktop/CNN_Cancer/dataset/treinamento_set'
  
 #carregando as imagens para teste 60 no total, e convertendo para gray scale
 base_teste = gerador_teste.flow_from_directory('dataset/test_set', 
-                                               target_size = (125, 125),
+                                               target_size = (size, size),
                                                batch_size = 10,
                                                class_mode = 'binary',
                                                color_mode = 'grayscale') #'dataset/teste_set''C:/Users/BlueTerror/Desktop/CNN_Cancer/dataset/teste_set'
