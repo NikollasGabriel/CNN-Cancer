@@ -18,7 +18,8 @@ size = 125
 
 classificador.add(Conv2D(32, (3, 3), padding='same',input_shape=(size,size,1), activation = 'relu'))
 classificador.add(BatchNormalization())
-classificador.add(Conv2D(32, (3, 3)))
+classificador.add(Conv2D(32, (3, 3), activation = 'relu'))
+classificador.add(BatchNormalization())
 classificador.add(MaxPooling2D(pool_size=(2, 2)))
 classificador.add(Dropout(0.25))
 
