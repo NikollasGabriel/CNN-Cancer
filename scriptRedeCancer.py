@@ -1,5 +1,4 @@
 import gc
-#from PIL import Image
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.layers import BatchNormalization
@@ -21,7 +20,7 @@ classificador.add(BatchNormalization())
 classificador.add(Conv2D(32, (3, 3), activation = 'relu'))
 classificador.add(BatchNormalization())
 classificador.add(MaxPooling2D())
-classificador.add(Dropout(0.25))
+#classificador.add(Dropout(0.25))
 
 #classificador.add(MaxPooling2D(pool_size=(2, 2)))
 #classificador.add(Dropout(0.25))
@@ -46,9 +45,9 @@ classificador.add(Flatten())
 #                neuronios descartados
 #classificador.add(Dropout(0.2))
 #                       numero de neuronios
-classificador.add(Dense(units = 128, activation = 'relu'))
+classificador.add(Dense(units = 512, activation = 'relu'))
 #                neuronios descartados
-classificador.add(Dropout(0.2))
+#classificador.add(Dropout(0.2))
 #               camada de saida = 1, ou tem cancer ou nao tem cancer
 classificador.add(Dense(units = 1, activation = 'sigmoid'))
 
@@ -81,7 +80,7 @@ base_teste = gerador_teste.flow_from_directory('dataset/test_set',
 
 #                                                   numero de imagens na base de treinamento
 classificador.summary()
-classificador.fit_generator(base_treinamento, steps_per_epoch = 50,
+classificador.fit_generator(base_treinamento, steps_per_epoch = 100,
                             epochs = 25,
                             validation_data = base_teste,
                             validation_steps = 50)
