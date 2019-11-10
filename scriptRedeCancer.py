@@ -20,6 +20,16 @@ classificador.add(BatchNormalization())
 classificador.add(Conv2D(32, (3, 3), activation = 'relu'))
 classificador.add(BatchNormalization())
 classificador.add(MaxPooling2D())
+
+classificador.add(Conv2D(64, (3 ,3), activation = 'relu', padding = 'same'))
+classificador.add(BatchNormalization())
+classificador.add(Conv2D(64, (3, 3), activation = 'relu', padding = 'same'))
+classificador.add(BatchNormalization())
+classificador.add(MaxPooling2D())
+
+
+
+
 #classificador.add(Dropout(0.25))
 
 #classificador.add(MaxPooling2D(pool_size=(2, 2)))
@@ -80,7 +90,7 @@ base_teste = gerador_teste.flow_from_directory('dataset/test_set',
 
 #                                                   numero de imagens na base de treinamento
 classificador.summary()
-classificador.fit_generator(base_treinamento, steps_per_epoch = 100,
-                            epochs = 25,
+classificador.fit_generator(base_treinamento, steps_per_epoch = 200,
+                            epochs = 50,
                             validation_data = base_teste,
-                            validation_steps = 50)
+                            validation_steps = 200)
